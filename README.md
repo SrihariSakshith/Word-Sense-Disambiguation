@@ -19,13 +19,15 @@ Welcome to **Word Sense Disambiguation (WSD)** — a project exploring multiple 
 
 ## 📖 Table of Contents
 1. [Introduction](#-introduction)
-2. [Environment Setup](#-environment-setup)
-3. [Run Naïve Disambiguation](#-run-naïve-disambiguation)
-4. [Run Simple LESK Algorithm](#-run-simple-lesk-algorithm)
-5. [Run Path Length Similarity](#-run-path-length-similarity)
-6. [Run Resnik Similarity](#-run-resnik-similarity)
-7. [References](#-references)
-8. [Acknowledgements](#-acknowledgements)
+2. [Algorithm Comparison](#-algorithm-comparison)
+3. [WSD Pipeline](#-wsd-pipeline)
+4. [Environment Setup](#-environment-setup)
+5. [Run Naïve Disambiguation](#-run-naïve-disambiguation)
+6. [Run Simple LESK Algorithm](#-run-simple-lesk-algorithm)
+7. [Run Path Length Similarity](#-run-path-length-similarity)
+8. [Run Resnik Similarity](#-run-resnik-similarity)
+9. [References](#-references)
+10. [Acknowledgements](#-acknowledgements)
 
 ---
 
@@ -33,12 +35,39 @@ Welcome to **Word Sense Disambiguation (WSD)** — a project exploring multiple 
 
 This project demonstrates **four different methods** for word sense disambiguation using the NLTK WordNet interface:
 
-1. Naïve Disambiguation (returns first sense in WordNet)
-2. Simple LESK Algorithm (overlap-based)
-3. Path Length Similarity (hypernym path length metric)
-4. Resnik Similarity (information-theoretic metric)
+1. **Naïve Disambiguation** — Selects the first sense from WordNet.  
+2. **Simple LESK Algorithm** — Uses overlap between gloss words and context.  
+3. **Path Length Similarity** — Computes semantic similarity using hypernym path length.  
+4. **Resnik Similarity** — Measures similarity using information content from a corpus.  
 
-The algorithms are implemented in Python, and detailed explanations are available in Jupyter notebooks.  
+---
+
+## 📊 Algorithm Comparison
+
+| Algorithm                  | Approach                            | Strengths                               | Limitations                                | Complexity |
+|----------------------------|------------------------------------|----------------------------------------|--------------------------------------------|------------|
+| **Naïve Disambiguation**   | Returns the first sense in WordNet | Fast, simple baseline                  | Not context-aware, often inaccurate       | O(1)       |
+| **Simple LESK Algorithm**  | Overlap of gloss & context words   | Lightweight, context-aware             | Limited by WordNet gloss quality          | O(n·m)     |
+| **Path Length Similarity** | Shortest path between synsets      | Intuitive, easy to interpret           | Ignores corpus frequency information      | O(V+E)     |
+| **Resnik Similarity**      | Information content from corpus    | Statistically grounded, accurate       | Needs a large, tagged corpus              | O(n)       |
+
+---
+
+## 🛠️ WSD Pipeline
+
+Here’s how the disambiguation process works:
+
+```mermaid
+flowchart TD
+    A[Input Text] --> B[Tokenization]
+    B --> C[POS Tagging]
+    C --> D[Candidate Synsets (WordNet)]
+    D --> E[Apply Algorithm: LESK / Path / Resnik / Naïve]
+    E --> F[Rank Synsets]
+    F --> G[Best Sense Selected]
+````
+
+This pipeline helps visualize how context and similarity measures lead to the **most accurate sense** of a word.
 
 ---
 
@@ -62,13 +91,11 @@ source myenv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
-````
+```
 
 ---
 
 ## 🔍 Run Naïve Disambiguation
-
-This method selects the **first sense** returned by WordNet.
 
 ```bash
 python -m src.naive_method
@@ -83,13 +110,11 @@ Examples:
 ['they pulled the canoe up on the bank', 'he sat on the bank of the river and watched the currents']
 ```
 
-📓 See the notebook: [Naïve Disambiguation](notebooks/naive-disambiguation.ipynb)
+📓 Notebook: [Naïve Disambiguation](notebooks/naive-disambiguation.ipynb)
 
 ---
 
 ## 🧩 Run Simple LESK Algorithm
-
-This approach uses the **overlap of gloss words** (context words) with definitions and examples.
 
 ```bash
 python -m src.simple_lesk_algorithm
@@ -108,8 +133,6 @@ The weight vector is: [0, 0.28768207245178085, 0]
 
 ## 🔗 Run Path Length Similarity
 
-This computes similarity based on the **shortest path** between synsets in WordNet.
-
 ```bash
 python -m src.path_length_similarity
 ```
@@ -119,24 +142,20 @@ Example:
 ```
 Enter first word: dog
 Enter second word: wolf
-Dog Definition: a member of the genus Canis...
-Wolf Definition: any of various predatory carnivorous canine mammals...
 similarity: -0.6931471805599453
 ```
 
-Compare resume keywords:
+For resume similarity:
 
 ```bash
 python -m src.path_similarity_resume
 ```
 
-🔍 Results: [Path Similarity Matrix](assets/path_similarity_matrix.txt)
+📄 Results: [Path Similarity Matrix](assets/path_similarity_matrix.txt)
 
 ---
 
 ## 📊 Run Resnik Similarity
-
-This method uses **information content** from WordNet to measure similarity.
 
 ```bash
 python -m src.resnik_similarity
@@ -147,12 +166,10 @@ Example:
 ```
 Enter the first word: java
 Enter the second word: language
-Java Definition: a platform-independent object-oriented programming language
-Language Definition: a systematic means of communicating by the use of sounds or conventional symbols
 similarity: 5.792086967391197
 ```
 
-Compare resume keywords:
+For resume similarity:
 
 ```bash
 python -m src.resnik_similarity_resume
