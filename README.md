@@ -57,15 +57,7 @@ This project demonstrates **four different methods** for word sense disambiguati
 
 Here’s how the disambiguation process works:
 
-```mermaid
-flowchart TD
-    A[Input Text] --> B[Tokenization]
-    B --> C[POS Tagging]
-    C --> D[Candidate Synsets (WordNet)]
-    D --> E[Apply Algorithm: LESK / Path / Resnik / Naïve]
-    E --> F[Rank Synsets]
-    F --> G[Best Sense Selected]
-````
+![Word Sense Disambiguation Flowchart](diagram.png)
 
 This pipeline helps visualize how context and similarity measures lead to the **most accurate sense** of a word.
 
