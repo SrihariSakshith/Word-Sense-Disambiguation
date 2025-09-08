@@ -176,6 +176,3 @@ python -m src.resnik_similarity_resume
 ## 🙌 Acknowledgements
 
 This project was inspired by the open-source repository [word-sense-disambiguation](https://github.com/anishLearnsToCode/word-sense-disambiguation) by **anishLearnsToCode** and is distributed under the [MIT License](LICENSE).
-
-Would you also like me to add a **table comparing all four algorithms** (accuracy/complexity) to make your README stand out even more?
-```
