@@ -57,7 +57,7 @@ This project demonstrates **four different methods** for word sense disambiguati
 
 Here’s how the disambiguation process works:
 
-![Word Sense Disambiguation Flowchart](diagram.png)
+![Word Sense Disambiguation Flowchart](image.png)
 
 This pipeline helps visualize how context and similarity measures lead to the **most accurate sense** of a word.
 
