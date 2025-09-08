@@ -1,7 +1,5 @@
 # Word Sense Disambiguation
 
-__Anish Sachdeva (DTU/2K16/MC/13)__
-
 __Natural Language Processing (Dr. Seba Susan)__
 
 [📘 Path Length Similarity](notebooks/path-similarity-metric.ipynb) |
@@ -35,7 +33,7 @@ To see the disambiguation of any given word using the naive method, pull this re
 machine and install all dependencies.
 
 ```powershell
-git clone https://github.com/anishLearnsToCode/word-sense-disambiguation.git
+git clone https://github.com/SrihariSakshith/word-sense-disambiguation.git
 pip install -r requirements.txt
 ```
 
@@ -62,7 +60,7 @@ to all possible senses of the given token.
 To run locally, clone the repository and install dependencies
 
 ```bash
-git clone https://github.com/anishLearnsToCode/word-sense-disambiguation.git
+git clone https://github.com/SrihariSakshith/word-sense-disambiguation.git
 pip install -r requirements.txt
 ```
 
@@ -85,7 +83,7 @@ To compute the Path Score and closest synsets between any 2 english words run th
 file as 
 
 ```bash
-git clone https://github.com/anishLearnsToCode/word-sense-disambiguation.git
+git clone https://github.com/SrihariSakshith/word-sense-disambiguation.git
 cd word-sense-disambiguation
 pip install -r requirements.txt
 cd src
@@ -113,7 +111,7 @@ To compute the similarity between 2 words and find closest possible synsets
 run `resnik_similarity.py` as:
 
 ```bash
-git clone https://github.com/anishLearnsToCode/word-sense-disambiguation.git
+git clone https://github.com/SrihariSakshith/word-sense-disambiguation.git
 cd word-sense-disambiguation
 pip install -r requirements.txt
 cd src
