@@ -1,53 +1,63 @@
-# Word Sense Disambiguation
+# 🌐 Word Sense Disambiguation (WSD)
 
-__Natural Language Processing (Dr. Seba Susan)__
+Welcome to **Word Sense Disambiguation (WSD)** — a project exploring multiple NLP algorithms to determine the correct meaning (sense) of a word based on its context.  
 
-[📘 Path Length Similarity](notebooks/path-similarity-metric.ipynb) |
-[📘 Resnik Similarity](notebooks/resnik-similarity.ipynb) |
-[📗 Naïve Disambiguation](notebooks/naive-disambiguation.ipynb) |
-[📗 Simple LESK Algorithm](notebooks/simple-lesk-algorithm.ipynb) |
-[✒ Report](assets/nlp-wsd.pdf)
-
-![booster](assets/booster.png)
-
-## Overview
-- [Introduction](#introduction)
-- [Setup](#setup)
-- [Naïve Disambiguation](#naïve-disambiguation)
-- [Simple LESK Algorithm Disambiguation](#simple-lesk-similarity-disambiguation)
-- [Path Length Similarity Disambiguation](#path-length-similarity-disambiguation)
-- [Resnik Similarity Disambiguation](#resnik-similarity-disambiguation)
-- [Bibliography](#bibliography)
+📚 Built as part of **Natural Language Processing (NLP)** coursework (Dr. Seba Susan).  
 
 ---
 
-## Introduction
-We explore 4 different metrics to compare similarity and disambiguate words.  
-For the 4 different methods refer to the Jupyter notebooks below:
+## 🔗 Quick Links
+- [📘 Path Length Similarity Notebook](notebooks/path-similarity-metric.ipynb)
+- [📘 Resnik Similarity Notebook](notebooks/resnik-similarity.ipynb)
+- [📗 Naïve Disambiguation Notebook](notebooks/naive-disambiguation.ipynb)
+- [📗 Simple LESK Algorithm Notebook](notebooks/simple-lesk-algorithm.ipynb)
+- [📄 Report](assets/nlp-wsd.pdf)
 
-### Notebooks
-1. [Naive Disambiguation](notebooks/naive-disambiguation.ipynb)
-2. [Simple LESK Algorithm Disambiguation](notebooks/simple-lesk-algorithm.ipynb)
-3. [Path Length Similarity Metric](notebooks/path-similarity-metric.ipynb)
-4. [Resnik Similarity Metric](notebooks/resnik-similarity.ipynb)
+![WSD](assets/booster.png)
 
 ---
 
-## Setup
+## 📖 Table of Contents
+1. [Introduction](#-introduction)
+2. [Environment Setup](#-environment-setup)
+3. [Run Naïve Disambiguation](#-run-naïve-disambiguation)
+4. [Run Simple LESK Algorithm](#-run-simple-lesk-algorithm)
+5. [Run Path Length Similarity](#-run-path-length-similarity)
+6. [Run Resnik Similarity](#-run-resnik-similarity)
+7. [References](#-references)
+8. [Acknowledgements](#-acknowledgements)
 
-Clone the repository, create a virtual environment, activate it, and install dependencies:
+---
+
+## 📜 Introduction
+
+This project demonstrates **four different methods** for word sense disambiguation using the NLTK WordNet interface:
+
+1. Naïve Disambiguation (returns first sense in WordNet)
+2. Simple LESK Algorithm (overlap-based)
+3. Path Length Similarity (hypernym path length metric)
+4. Resnik Similarity (information-theoretic metric)
+
+The algorithms are implemented in Python, and detailed explanations are available in Jupyter notebooks.  
+
+---
+
+## ⚙️ Environment Setup
+
+Clone this repository and set up a virtual environment to get started:
 
 ```bash
-git clone https://github.com/anishLearnsToCode/word-sense-disambiguation.git
-cd word-sense-disambiguation
+# Clone the repo
+git clone https://github.com/SrihariSakshith/Word-Sense-Disambiguation.git
+cd Word-Sense-Disambiguation
 
 # Create a virtual environment
 python -m venv myenv
 
-# Activate virtual environment
-# On Windows (PowerShell):
+# Activate the environment
+# Windows (PowerShell)
 myenv\Scripts\Activate
-# On macOS/Linux:
+# macOS/Linux
 source myenv/bin/activate
 
 # Install dependencies
@@ -56,15 +66,15 @@ pip install -r requirements.txt
 
 ---
 
-## Naïve Disambiguation
+## 🔍 Run Naïve Disambiguation
 
-Run the Naïve Disambiguation script:
+This method selects the **first sense** returned by WordNet.
 
 ```bash
 python -m src.naive_method
 ```
 
-Example output:
+Example:
 
 ```
 Enter word for disambiguation: bank
@@ -73,14 +83,13 @@ Examples:
 ['they pulled the canoe up on the bank', 'he sat on the bank of the river and watched the currents']
 ```
 
-See a running example with explanation in
-[this notebook](notebooks/naive-disambiguation.ipynb).
+📓 See the notebook: [Naïve Disambiguation](notebooks/naive-disambiguation.ipynb)
 
 ---
 
-## Simple LESK Similarity Disambiguation
+## 🧩 Run Simple LESK Algorithm
 
-Run the Simple LESK Algorithm script:
+This approach uses the **overlap of gloss words** (context words) with definitions and examples.
 
 ```bash
 python -m src.simple_lesk_algorithm
@@ -97,9 +106,9 @@ The weight vector is: [0, 0.28768207245178085, 0]
 
 ---
 
-## Path Length Similarity Disambiguation
+## 🔗 Run Path Length Similarity
 
-Run the Path Length Similarity script:
+This computes similarity based on the **shortest path** between synsets in WordNet.
 
 ```bash
 python -m src.path_length_similarity
@@ -115,19 +124,19 @@ Wolf Definition: any of various predatory carnivorous canine mammals...
 similarity: -0.6931471805599453
 ```
 
-For resume similarity computation:
+Compare resume keywords:
 
 ```bash
 python -m src.path_similarity_resume
 ```
 
-See results [here](assets/path_similarity_matrix.txt).
+🔍 Results: [Path Similarity Matrix](assets/path_similarity_matrix.txt)
 
 ---
 
-## Resnik Similarity Disambiguation
+## 📊 Run Resnik Similarity
 
-Run the Resnik Similarity script:
+This method uses **information content** from WordNet to measure similarity.
 
 ```bash
 python -m src.resnik_similarity
@@ -143,27 +152,30 @@ Language Definition: a systematic means of communicating by the use of sounds or
 similarity: 5.792086967391197
 ```
 
-For resume similarity computation:
+Compare resume keywords:
 
 ```bash
 python -m src.resnik_similarity_resume
 ```
 
+📓 Notebook: [Resnik Similarity](notebooks/resnik-similarity.ipynb)
+
 ---
 
-## Bibliography
+## 📚 References
 
 1. [Speech & Language Processing \~Jurafsky](https://web.stanford.edu/~jurafsky/slp3/)
-2. [nltk](https://www.nltk.org/)
+2. [NLTK Documentation](https://www.nltk.org/)
 3. [pickle](https://docs.python.org/3/library/pickle.html)
 4. [pandas](https://pandas.pydata.org/)
 5. [numpy](https://numpy.org/)
-6. [wordnet interface](https://www.nltk.org/howto/wordnet.html)
+6. [WordNet Interface](https://www.nltk.org/howto/wordnet.html)
 
 ---
 
-### Acknowledgement
+## 🙌 Acknowledgements
 
-This project is based on [word-sense-disambiguation](https://github.com/anishLearnsToCode/word-sense-disambiguation)
-by **anishLearnsToCode**, licensed under the [MIT License](LICENSE).
+This project was inspired by the open-source repository [word-sense-disambiguation](https://github.com/anishLearnsToCode/word-sense-disambiguation) by **anishLearnsToCode** and is distributed under the [MIT License](LICENSE).
 
+Would you also like me to add a **table comparing all four algorithms** (accuracy/complexity) to make your README stand out even more?
+```
