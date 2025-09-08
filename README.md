@@ -1,5 +1,6 @@
 # Word Sense Disambiguation
 
+__Anish Sachdeva (DTU/2K16/MC/13)__  
 __Natural Language Processing (Dr. Seba Susan)__
 
 [📘 Path Length Similarity](notebooks/path-similarity-metric.ipynb) |
@@ -12,135 +13,158 @@ __Natural Language Processing (Dr. Seba Susan)__
 
 ## Overview
 - [Introduction](#introduction)
-- [Naïve Disambiguation](#nave-disambiguation)
+- [Setup](#setup)
+- [Naïve Disambiguation](#naïve-disambiguation)
 - [Simple LESK Algorithm Disambiguation](#simple-lesk-similarity-disambiguation)
 - [Path Length Similarity Disambiguation](#path-length-similarity-disambiguation)
 - [Resnik Similarity Disambiguation](#resnik-similarity-disambiguation)
 - [Bibliography](#bibliography)
 
+---
+
 ## Introduction
-We explore 4 different metrics to compare similarity and disambiguate words. For the 4 different 
-methods refer to the Notebooks Below:
+We explore 4 different metrics to compare similarity and disambiguate words.  
+For the 4 different methods refer to the Jupyter notebooks below:
 
 ### Notebooks
 1. [Naive Disambiguation](notebooks/naive-disambiguation.ipynb)
-1. [Simple LESK Algorithm Disambiguation](notebooks/simple-lesk-algorithm.ipynb) 
-1. [Path Length Similarity Metric](notebooks/path-similarity-metric.ipynb)
-1. [Resnik Similarity Metric](notebooks/resnik-similarity.ipynb)
+2. [Simple LESK Algorithm Disambiguation](notebooks/simple-lesk-algorithm.ipynb)
+3. [Path Length Similarity Metric](notebooks/path-similarity-metric.ipynb)
+4. [Resnik Similarity Metric](notebooks/resnik-similarity.ipynb)
+
+---
+
+## Setup
+
+Clone the repository, create a virtual environment, activate it, and install dependencies:
+
+```bash
+git clone https://github.com/anishLearnsToCode/word-sense-disambiguation.git
+cd word-sense-disambiguation
+
+# Create a virtual environment
+python -m venv myenv
+
+# Activate virtual environment
+# On Windows (PowerShell):
+myenv\Scripts\Activate
+# On macOS/Linux:
+source myenv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+````
+
+---
 
 ## Naïve Disambiguation
-To see the disambiguation of any given word using the naive method, pull this repository on your 
-machine and install all dependencies.
 
-```powershell
-git clone https://github.com/SrihariSakshith/word-sense-disambiguation.git
-pip install -r requirements.txt
+Run the Naïve Disambiguation script:
+
+```bash
+python -m src.naive_method
 ```
 
-navigate to the `naive_method.py` file and run it and enter a word of your choice:
+Example output:
 
-```powershell
-cd src
-python naive_method.py
->> Enter word for disambiguation:    bank
->> Definition: a large natural stream of water (larger than a creek)
->> Examples:
->> ['they pulled the canoe up on the bank',
->> 'he sat on the bank of the river and watched the currents']
+```
+Enter word for disambiguation: bank
+Definition: a large natural stream of water (larger than a creek)
+Examples:
+['they pulled the canoe up on the bank', 'he sat on the bank of the river and watched the currents']
 ```
 
-See a running example with explanation in 
-[this notebook](notebooks/naive-disambiguation.ipynb)
+See a running example with explanation in
+[this notebook](notebooks/naive-disambiguation.ipynb).
+
+---
 
 ## Simple LESK Similarity Disambiguation
-In the Simple LESK Algorithm we use the words present in the gloss surrounding the main token to 
-disambiguate it's meaning and we assign Inverse Document Frequency (IDF) values and assign weights
-to all possible senses of the given token.
 
-To run locally, clone the repository and install dependencies
+Run the Simple LESK Algorithm script:
 
 ```bash
-git clone https://github.com/SrihariSakshith/word-sense-disambiguation.git
-pip install -r requirements.txt
+python -m src.simple_lesk_algorithm
 ```
 
-Navigate to `simple_lesk_algorithm.py` file and test with sample gloss and word token
+Example:
+
+```
+Enter the Gloss (document): i like a hot cup of java in the morning
+Enter word for disambiguation: java
+The disambiguated meaning is: a beverage consisting of an infusion of ground coffee beans
+The weight vector is: [0, 0.28768207245178085, 0]
+```
+
+---
+
+## Path Length Similarity Disambiguation
+
+Run the Path Length Similarity script:
 
 ```bash
-cd src
-python simple_lesk_algorithm.py
->> Enter the Gloss (document):	i like a hot cup of java in the morning 
->> Enter word for disambiguation:	java
->> The disambiguated meaning is: a beverage consisting of an infusion of ground coffee beans
->> The weight vector is: [0, 0.28768207245178085, 0]
+python -m src.path_length_similarity
 ```
 
-## Path length Similarity Disambiguation
-The Path Length Similarity computes the minimum hop path between any 2 words in the wordnet 
-corpus using the Hypernym Paths available and then computes the similarity score as __-log (pathlen(w1, w2))__.
+Example:
 
-To compute the Path Score and closest synsets between any 2 english words run the `path_length_similarity.py`
-file as 
+```
+Enter first word: dog
+Enter second word: wolf
+Dog Definition: a member of the genus Canis...
+Wolf Definition: any of various predatory carnivorous canine mammals...
+similarity: -0.6931471805599453
+```
+
+For resume similarity computation:
 
 ```bash
-git clone https://github.com/SrihariSakshith/word-sense-disambiguation.git
-cd word-sense-disambiguation
-pip install -r requirements.txt
-cd src
-python path_length_similarity.py
->> Enter first word:	dog
->> Enter second word:	wolf
->> Dog Definition: a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since prehistoric times; occurs in many breeds
->> Wolf Definition: any of various predatory carnivorous canine mammals of North America and Eurasia that usually hunt in packs
->> similarity: -0.6931471805599453
+python -m src.path_similarity_resume
 ```
 
-Then to compute the similarity between 6th document with other documents (keywords) in the resume run the
-`path_similarity_resume.py` file as:
+See results [here](assets/path_similarity_matrix.txt).
 
-```bash
-cd src
-python path_similarity_resume.py
-```
-
-See [results here](assets/path_similarity_matrix.txt). See the explanation and results in 
-[Jupyter Notebook](notebooks/path-similarity-metric.ipynb).
+---
 
 ## Resnik Similarity Disambiguation
-To compute the similarity between 2 words and find closest possible synsets 
-run `resnik_similarity.py` as:
+
+Run the Resnik Similarity script:
 
 ```bash
-git clone https://github.com/SrihariSakshith/word-sense-disambiguation.git
-cd word-sense-disambiguation
-pip install -r requirements.txt
-cd src
-python resnik_similarity.py
->> Enter the first word:	java
->> Enter the second word:	language
->> Java Definition: a platform-independent object-oriented programming language
->> Language Definition: a systematic means of communicating by the use of sounds or conventional symbols
->> similarity: 5.792086967391197
+python -m src.resnik_similarity
 ```
 
-To run this metric on the Resume and see the similarity between 6th document and other documents
-run the `resnik_similarity_resume.py` file.
+Example:
 
-See resnik similarity coefficient [matrix here](assets/resnik_similarity_matrix.txt) and
-see explanation and results in [this Notebook](notebooks/resnik-similarity.ipynb). 
+```
+Enter the first word: java
+Enter the second word: language
+Java Definition: a platform-independent object-oriented programming language
+Language Definition: a systematic means of communicating by the use of sounds or conventional symbols
+similarity: 5.792086967391197
+```
+
+For resume similarity computation:
+
+```bash
+python -m src.resnik_similarity_resume
+```
+
+---
 
 ## Bibliography
-1. [Speech & Language Processing ~Jurafsky](https://web.stanford.edu/~jurafsky/slp3/)
-1. [nltk](https://www.nltk.org/)
-1. [pickle](https://docs.python.org/3/library/pickle.html)
-1. [pandas](https://pandas.pydata.org/)
-1. [pandas.DataFrames](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html)
-1. [Indexing and Slicing on Pandas DataFrames](https://datacarpentry.org/python-ecology-lesson/03-index-slice-subset/index.html)
-1. [numpy](https://numpy.org/)
-1. [wordnet interface](https://www.nltk.org/howto/wordnet.html)
+
+1. [Speech & Language Processing \~Jurafsky](https://web.stanford.edu/~jurafsky/slp3/)
+2. [nltk](https://www.nltk.org/)
+3. [pickle](https://docs.python.org/3/library/pickle.html)
+4. [pandas](https://pandas.pydata.org/)
+5. [numpy](https://numpy.org/)
+6. [wordnet interface](https://www.nltk.org/howto/wordnet.html)
 
 ---
 
 ### Acknowledgement
-This project is based on [word-sense-disambiguation](https://github.com/anishLearnsToCode/word-sense-disambiguation)  
+
+This project is based on [word-sense-disambiguation](https://github.com/anishLearnsToCode/word-sense-disambiguation)
 by **anishLearnsToCode**, licensed under the [MIT License](LICENSE).
+
